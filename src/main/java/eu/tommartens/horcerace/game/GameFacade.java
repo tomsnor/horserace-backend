@@ -4,8 +4,8 @@ public interface GameFacade {
 
     GameDTO create();
 
-    GameDTO get(long id);
+    GameDTO get(Long id);
 
-    GameDTO iterate(long id);
+    GameDTO iterate(Long id);
 
 }

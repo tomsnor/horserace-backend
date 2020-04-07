@@ -3,30 +3,21 @@ package eu.tommartens.horcerace.game;
 import eu.tommartens.horcerace.deck.Deck;
 import eu.tommartens.horcerace.lane.Lane;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
 public class Game {
 
-    @Id
-    @GeneratedValue
-    private long id;
-    @OneToOne
+    private Long id;
     private Deck deck;
-    @OneToMany
     private List<Lane> lanes;
     private int finish;
     private GameStatus status;
 
-    public Game() {
+    public Long getId() {
+        return id;
     }
 
-    public long getId() {
-        return this.id;
-    }
-
-    public void setId(final long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

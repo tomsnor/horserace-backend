@@ -1,18 +1,8 @@
 package eu.tommartens.horcerace.card;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Entity
 public class Card {
 
-    @Id
-    @GeneratedValue
-    private long id;
-    // Koning
     private Face face;
-    // Schoppen
     private Suit suit;
     private String code;
 
@@ -23,14 +13,6 @@ public class Card {
         this.face = face;
         this.suit = suit;
         this.code = face.getCode() + suit.getCode();
-    }
-
-    public long getId() {
-        return this.id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
     }
 
     public Face getFace() {
