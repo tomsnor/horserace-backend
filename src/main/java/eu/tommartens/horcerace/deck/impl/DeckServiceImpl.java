@@ -5,7 +5,6 @@ import eu.tommartens.horcerace.card.CardService;
 import eu.tommartens.horcerace.card.Face;
 import eu.tommartens.horcerace.card.Suit;
 import eu.tommartens.horcerace.deck.Deck;
-import eu.tommartens.horcerace.deck.DeckRepository;
 import eu.tommartens.horcerace.deck.DeckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +17,10 @@ import java.util.List;
 public class DeckServiceImpl implements DeckService {
 
     private final CardService cardService;
-    private final DeckRepository deckRepository;
 
     @Autowired
-    public DeckServiceImpl(final CardService cardService, final DeckRepository deckRepository) {
+    public DeckServiceImpl(final CardService cardService) {
         this.cardService = cardService;
-        this.deckRepository = deckRepository;
     }
 
     @Override
@@ -38,9 +35,10 @@ public class DeckServiceImpl implements DeckService {
                 cards.add(card);
             }
         }
+
         deck.setCards(cards);
         Collections.shuffle(cards);
-        return this.deckRepository.saveAndFlush(deck);
+        return deck;
     }
 
     @Override
@@ -54,7 +52,6 @@ public class DeckServiceImpl implements DeckService {
         }
         final Card card = cards.remove(0);
         pile.add(card);
-        this.deckRepository.saveAndFlush(deck);
         return card;
     }
 
