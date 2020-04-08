@@ -1,6 +1,9 @@
 package eu.tommartens.horcerace.deck.impl;
 
-import eu.tommartens.horcerace.card.*;
+import eu.tommartens.horcerace.card.Card;
+import eu.tommartens.horcerace.card.CardService;
+import eu.tommartens.horcerace.card.Face;
+import eu.tommartens.horcerace.card.Suit;
 import eu.tommartens.horcerace.deck.Deck;
 import eu.tommartens.horcerace.deck.DeckService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +35,6 @@ public class DeckServiceImpl implements DeckService {
                 cards.add(card);
             }
         }
-
-        Card joker = new Joker();
-        Card joker2 = new Joker();
-        cards.add(joker);
-        cards.add(joker2);
 
         deck.setCards(cards);
         Collections.shuffle(cards);
