@@ -1,6 +1,7 @@
 package eu.tommartens.horcerace.game.impl;
 
 import eu.tommartens.horcerace.card.Card;
+import eu.tommartens.horcerace.card.Joker;
 import eu.tommartens.horcerace.deck.Deck;
 import eu.tommartens.horcerace.deck.DeckService;
 import eu.tommartens.horcerace.game.Game;
@@ -62,14 +63,21 @@ public class GameServiceImpl implements GameService {
     @Override
     @CachePut(value = GAMES_CACHE_NAME, key = "#result.id")
     public Game iterate(final Game game) {
-        final Card card = this.deckService.burn(game.getDeck());
-        for (final Lane lane : game.getLanes()) {
-            this.laneService.process(lane, card);
-            if (lane.getPosition() >= game.getFinish()) {
-                this.laneService.setStatus(lane, LaneStatus.WINNER);
-                this.finish(game);
+        final Card card = this.deckService.drawCard(game.getDeck());
+        if (card instanceof Joker) {
+            //switcheroo
+        } else {
+            for (final Lane lane : game.getLanes()) {
+                if (lane.getCard().getSuit().equals(card.getSuit())) {
+                    lane.setPosition(lane.getPosition() + 1);
+                }
+                if (lane.getPosition() >= game.getFinish()) {
+                    lane.setLaneStatus(LaneStatus.WINNER);
+                    this.finish(game);
+                }
             }
         }
+
         return game;
     }
 
@@ -77,7 +85,7 @@ public class GameServiceImpl implements GameService {
         game.setStatus(GameStatus.FINISHED);
         for (final Lane lane : game.getLanes()) {
             if (!lane.getLaneStatus().equals(LaneStatus.WINNER))
-                this.laneService.setStatus(lane, LaneStatus.LOSER);
+                lane.setLaneStatus(LaneStatus.LOSER);
         }
     }
 }

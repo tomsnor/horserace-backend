@@ -5,11 +5,12 @@ public class Card {
     private Face face;
     private Suit suit;
 
-    public Card() {
-    }
-
     public Card(final Face face, final Suit suit) {
         this.face = face;
+        this.suit = suit;
+    }
+
+    protected Card(Suit suit) {
         this.suit = suit;
     }
 

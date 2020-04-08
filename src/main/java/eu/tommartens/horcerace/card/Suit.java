@@ -5,7 +5,8 @@ public enum Suit {
     SPADES("S"),
     HEARTS("H"),
     DIAMONDS("D"),
-    CLUBS("C");
+    CLUBS("C"),
+    JOKER("JOKER");
 
     private final String code;
 

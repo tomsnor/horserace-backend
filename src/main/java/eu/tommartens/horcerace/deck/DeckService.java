@@ -8,7 +8,7 @@ public interface DeckService {
 
     Deck create();
 
-    Card burn(Deck deck);
+    Card drawCard(Deck deck);
 
     Card remove(final Deck deck, final Face face, final Suit suit);
 }
