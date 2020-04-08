@@ -7,17 +7,17 @@ import java.util.List;
 
 public class GameDTO {
 
-    private long id;
+    private String id;
     private DeckDTO deck;
     private List<LaneDTO> lanes;
     private int finish;
     private GameStatus status;
 
-    public long getId() {
-        return this.id;
+    public String getId() {
+        return id;
     }
 
-    public void setId(final long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

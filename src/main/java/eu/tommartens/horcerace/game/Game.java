@@ -7,17 +7,17 @@ import java.util.List;
 
 public class Game {
 
-    private Long id;
+    private String id;
     private Deck deck;
     private List<Lane> lanes;
     private int finish;
     private GameStatus status;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

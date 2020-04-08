@@ -27,14 +27,15 @@ public class GameFacadeImpl implements GameFacade {
     }
 
     @Override
-    public GameDTO get(final Long id) {
+    public GameDTO get(final String id) {
         final Game game = this.gameService.get(id);
         return this.modelMapper.map(game, GameDTO.class);
     }
 
     @Override
-    public GameDTO iterate(final Long id) {
-        final Game game = this.gameService.iterate(id);
+    public GameDTO iterate(final String id) {
+        Game game = this.gameService.get(id);
+        game = gameService.iterate(game);
         return this.modelMapper.map(game, GameDTO.class);
     }
 }

@@ -4,8 +4,8 @@ public interface GameService {
 
     Game create();
 
-    Game get(Long id);
+    Game get(String id);
 
-    Game iterate(Long id);
+    Game iterate(Game game);
 
 }

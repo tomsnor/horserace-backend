@@ -10,13 +10,13 @@ import eu.tommartens.horcerace.lane.Lane;
 import eu.tommartens.horcerace.lane.LaneService;
 import eu.tommartens.horcerace.lane.LaneStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
+import static eu.tommartens.horcerace.HorseRaceConstants.GAMES_CACHE_NAME;
 import static eu.tommartens.horcerace.card.Face.ACE;
 import static eu.tommartens.horcerace.card.Suit.CLUBS;
 import static eu.tommartens.horcerace.card.Suit.DIAMONDS;
@@ -29,21 +29,18 @@ public class GameServiceImpl implements GameService {
     private final DeckService deckService;
     private final LaneService laneService;
 
-    private CacheManager cacheManager;
-
     @Autowired
-    public GameServiceImpl(DeckService deckService, LaneService laneService, CacheManager cacheManager) {
+    public GameServiceImpl(DeckService deckService, LaneService laneService) {
         this.deckService = deckService;
         this.laneService = laneService;
-        this.cacheManager = cacheManager;
     }
 
     @Override
-    @CachePut(value = "games", key = "#result.id")
+    @CachePut(value = GAMES_CACHE_NAME, key = "#result.id")
     public Game create() {
         final Game game = new Game();
         // todo: generate random unique key
-        game.setId(50L);
+        game.setId(Long.toString(System.currentTimeMillis()));
         game.setStatus(GameStatus.RUNNING);
         game.setFinish(10);
         final Deck deck = this.deckService.create();
@@ -57,23 +54,20 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    @Cacheable("games")
-    public Game get(final Long id) {
+    @Cacheable(value = GAMES_CACHE_NAME)
+    public Game get(final String id) {
         throw new RuntimeException();
     }
 
     @Override
-    @CachePut("games")
-    public Game iterate(final Long id) {
-        Game game = get(id);
-        if (game.getStatus().equals(GameStatus.RUNNING)) {
-            final Card card = this.deckService.burn(game.getDeck());
-            for (final Lane lane : game.getLanes()) {
-                this.laneService.process(lane, card);
-                if (lane.getPosition() >= game.getFinish()) {
-                    this.laneService.setStatus(lane, LaneStatus.WINNER);
-                    this.finish(game);
-                }
+    @CachePut(value = GAMES_CACHE_NAME, key = "#result.id")
+    public Game iterate(final Game game) {
+        final Card card = this.deckService.burn(game.getDeck());
+        for (final Lane lane : game.getLanes()) {
+            this.laneService.process(lane, card);
+            if (lane.getPosition() >= game.getFinish()) {
+                this.laneService.setStatus(lane, LaneStatus.WINNER);
+                this.finish(game);
             }
         }
         return game;

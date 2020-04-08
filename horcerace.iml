@@ -5,12 +5,19 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="Entities" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/eu/tommartens/horcerace/HorceraceApplicationConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/eu/tommartens/horcerace/HorceraceApplication.java</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
@@ -98,5 +105,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.2.4.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.6.3" level="project" />
     <orderEntry type="library" name="Maven: org.modelmapper:modelmapper:2.3.5" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.10" level="project" />
   </component>
 </module>

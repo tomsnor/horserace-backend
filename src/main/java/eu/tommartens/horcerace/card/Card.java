@@ -4,7 +4,6 @@ public class Card {
 
     private Face face;
     private Suit suit;
-    private String code;
 
     public Card() {
     }
@@ -12,7 +11,6 @@ public class Card {
     public Card(final Face face, final Suit suit) {
         this.face = face;
         this.suit = suit;
-        this.code = face.getCode() + suit.getCode();
     }
 
     public Face getFace() {
@@ -32,11 +30,7 @@ public class Card {
     }
 
     public String getCode() {
-        return this.code;
-    }
-
-    public void setCode(final String code) {
-        this.code = code;
+        return face.getCode() + suit.getCode();
     }
 
     @Override

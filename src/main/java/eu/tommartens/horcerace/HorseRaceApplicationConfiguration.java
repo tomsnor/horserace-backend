@@ -8,11 +8,11 @@ import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.concurrent.TimeUnit;
+import static eu.tommartens.horcerace.HorseRaceConstants.GAMES_CACHE_NAME;
 
 @Configuration
 @EnableCaching
-public class HorceraceApplicationConfiguration {
+public class HorseRaceApplicationConfiguration {
 
     @Bean
     public ModelMapper modelMapper() {
@@ -21,17 +21,15 @@ public class HorceraceApplicationConfiguration {
 
     @Bean
     public CacheManager cacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager("games");
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager(GAMES_CACHE_NAME);
         cacheManager.setCaffeine(caffeineCacheBuilder());
         return cacheManager;
     }
 
-    protected Caffeine<Object,Object> caffeineCacheBuilder() {
+    protected Caffeine<Object, Object> caffeineCacheBuilder() {
         return Caffeine.newBuilder()
-                .initialCapacity(100)
+                .initialCapacity(10)
                 .maximumSize(500)
-                .expireAfterAccess(10, TimeUnit.MINUTES)
-                .weakKeys()
                 .recordStats();
     }
 
