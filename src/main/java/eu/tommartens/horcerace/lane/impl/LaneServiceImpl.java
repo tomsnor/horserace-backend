@@ -22,7 +22,7 @@ public class LaneServiceImpl implements LaneService {
 
     @Override
     public Lane create(final Deck deck, final Face face, final Suit suit) {
-        final Card aceOfSpades = this.deckService.remove(deck, face, suit);
+        final Card aceOfSpades = this.deckService.removeCardFromDeck(deck, face, suit);
         return new Lane(aceOfSpades);
     }
 

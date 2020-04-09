@@ -1,7 +1,5 @@
 package eu.tommartens.horcerace.game.impl;
 
-import eu.tommartens.horcerace.card.Card;
-import eu.tommartens.horcerace.card.Joker;
 import eu.tommartens.horcerace.deck.Deck;
 import eu.tommartens.horcerace.deck.DeckService;
 import eu.tommartens.horcerace.game.Game;
@@ -9,7 +7,6 @@ import eu.tommartens.horcerace.game.GameService;
 import eu.tommartens.horcerace.game.GameStatus;
 import eu.tommartens.horcerace.lane.Lane;
 import eu.tommartens.horcerace.lane.LaneService;
-import eu.tommartens.horcerace.lane.LaneStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -40,7 +37,6 @@ public class GameServiceImpl implements GameService {
     @CachePut(value = GAMES_CACHE_NAME, key = "#result.id")
     public Game create() {
         final Game game = new Game();
-        // todo: generate random unique key
         game.setId(Long.toString(System.currentTimeMillis()));
         game.setStatus(GameStatus.RUNNING);
         game.setFinish(10);
@@ -60,32 +56,4 @@ public class GameServiceImpl implements GameService {
         throw new RuntimeException();
     }
 
-    @Override
-    @CachePut(value = GAMES_CACHE_NAME, key = "#result.id")
-    public Game iterate(final Game game) {
-        final Card card = this.deckService.drawCard(game.getDeck());
-        if (card instanceof Joker) {
-            //switcheroo
-        } else {
-            for (final Lane lane : game.getLanes()) {
-                if (lane.getCard().getSuit().equals(card.getSuit())) {
-                    lane.setPosition(lane.getPosition() + 1);
-                }
-                if (lane.getPosition() >= game.getFinish()) {
-                    lane.setLaneStatus(LaneStatus.WINNER);
-                    this.finish(game);
-                }
-            }
-        }
-
-        return game;
-    }
-
-    protected void finish(final Game game) {
-        game.setStatus(GameStatus.FINISHED);
-        for (final Lane lane : game.getLanes()) {
-            if (!lane.getLaneStatus().equals(LaneStatus.WINNER))
-                lane.setLaneStatus(LaneStatus.LOSER);
-        }
-    }
 }

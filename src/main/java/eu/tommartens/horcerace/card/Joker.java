@@ -18,6 +18,10 @@ public class Joker extends Card {
 
     @Override
     public boolean equals(final Object obj) {
-        return obj instanceof Joker;
+        if (!(obj instanceof Joker)) {
+            return false;
+        }
+        Joker that = (Joker) obj;
+        return this.getSuit().equals(that.getSuit());
     }
 }
