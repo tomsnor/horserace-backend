@@ -6,14 +6,14 @@ public class Lane {
 
     private Card card;
     private int position;
-    private LaneStatus laneStatus;
+    private LaneStatus status;
 
     public Lane() {
     }
 
     public Lane(final Card card) {
         this.card = card;
-        this.laneStatus = LaneStatus.RUNNING;
+        this.status = LaneStatus.RUNNING;
     }
 
     public Card getCard() {
@@ -32,11 +32,11 @@ public class Lane {
         this.position = position;
     }
 
-    public LaneStatus getLaneStatus() {
-        return this.laneStatus;
+    public LaneStatus getStatus() {
+        return this.status;
     }
 
-    public void setLaneStatus(final LaneStatus laneStatus) {
-        this.laneStatus = laneStatus;
+    public void setStatus(final LaneStatus status) {
+        this.status = status;
     }
 }

@@ -17,9 +17,9 @@ public class CheckForFinishTurnPostProcessorImpl implements TurnPostProcessor {
         Optional<Lane> winningLane = findWinner(game);
         winningLane.ifPresent(winner -> {
             for (final Lane lane : game.getLanes()) {
-                lane.setLaneStatus(LaneStatus.LOSER);
+                lane.setStatus(LaneStatus.LOSER);
             }
-            winner.setLaneStatus(LaneStatus.WINNER);
+            winner.setStatus(LaneStatus.WINNER);
             game.setStatus(GameStatus.FINISHED);
         });
     }
