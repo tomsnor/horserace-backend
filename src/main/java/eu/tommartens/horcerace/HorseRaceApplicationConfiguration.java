@@ -2,6 +2,7 @@ package eu.tommartens.horcerace;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import eu.tommartens.horcerace.card.Suit;
+import eu.tommartens.horcerace.turn.AfterTurnProcessor;
 import eu.tommartens.horcerace.turn.TurnPostProcessor;
 import eu.tommartens.horcerace.turn.TurnPreProcessor;
 import eu.tommartens.horcerace.turn.TurnProcessor;
@@ -51,6 +52,13 @@ public class HorseRaceApplicationConfiguration {
     }
 
     @Bean
+    public List<AfterTurnProcessor> afterTurnProcessors(AfterTurnProcessor cleanUpGameAfterTurnProcessor) {
+        List<AfterTurnProcessor> afterTurnProcessors = new ArrayList<>();
+        afterTurnProcessors.add(cleanUpGameAfterTurnProcessor);
+        return afterTurnProcessors;
+    }
+
+    @Bean
     public CacheManager cacheManager() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager(GAMES_CACHE_NAME);
         cacheManager.setCaffeine(caffeineCacheBuilder());
@@ -61,7 +69,7 @@ public class HorseRaceApplicationConfiguration {
         return Caffeine.newBuilder()
                 .initialCapacity(10)
                 .maximumSize(500)
-                .expireAfterAccess(15, TimeUnit.MINUTES)
+                .expireAfterWrite(25, TimeUnit.MINUTES)
                 .recordStats();
     }
 

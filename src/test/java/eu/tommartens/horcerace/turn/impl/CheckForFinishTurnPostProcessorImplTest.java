@@ -10,7 +10,6 @@ public class CheckForFinishTurnPostProcessorImplTest {
 
     @Before
     public void setUp() throws Exception {
-
         checkForFinishTurnPostProcessor = new CheckForFinishTurnPostProcessorImpl();
     }
 

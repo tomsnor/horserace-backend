@@ -1,6 +1,7 @@
 package eu.tommartens.horcerace.game;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,19 +24,24 @@ public class GameController {
                 .toUri();
         return ResponseEntity.created(location).body(game);
     }
-
-    @GetMapping("/game/{id}")
-    public GameDTO join(@PathVariable final String id) {
-        return this.gameFacade.get(id);
-    }
+//
+//    @GetMapping("/game/{id}")
+//    public GameDTO join(@PathVariable final String id) {
+//        return this.gameFacade.get(id);
+//    }
 
     @GetMapping("/game/{id}/iterate")
     public GameDTO iterate(@PathVariable final String id) {
-        return this.gameFacade.iterate(id);
+        return this.gameFacade.doTurn(id);
     }
 
     @Autowired
     public void setGameFacade(final GameFacade gameFacade) {
         this.gameFacade = gameFacade;
+    }
+
+    @ExceptionHandler(GameNotFoundException.class)
+    public ResponseEntity<String> handleException(GameNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

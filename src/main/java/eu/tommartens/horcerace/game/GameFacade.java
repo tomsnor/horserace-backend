@@ -6,6 +6,6 @@ public interface GameFacade {
 
     GameDTO get(String id);
 
-    GameDTO iterate(String id);
+    GameDTO doTurn(String id);
 
 }
