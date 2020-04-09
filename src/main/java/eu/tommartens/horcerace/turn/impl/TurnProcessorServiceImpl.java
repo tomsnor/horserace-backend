@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TurnProcessorFacadeImpl implements TurnProcessorFacade {
+public class TurnProcessorServiceImpl implements TurnProcessorService {
 
     private TurnProcessorFactory turnProcessorFactory;
     private DeckService deckService;
@@ -20,7 +20,7 @@ public class TurnProcessorFacadeImpl implements TurnProcessorFacade {
     private List<TurnPostProcessor> turnPostProcessors;
 
     @Autowired
-    public TurnProcessorFacadeImpl(TurnProcessorFactory turnProcessorFactory, DeckService deckService) {
+    public TurnProcessorServiceImpl(TurnProcessorFactory turnProcessorFactory, DeckService deckService) {
         this.turnProcessorFactory = turnProcessorFactory;
         this.deckService = deckService;
     }

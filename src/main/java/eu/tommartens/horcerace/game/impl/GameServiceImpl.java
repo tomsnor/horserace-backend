@@ -5,7 +5,7 @@ import eu.tommartens.horcerace.game.Game;
 import eu.tommartens.horcerace.game.GameFactory;
 import eu.tommartens.horcerace.game.GameNotFoundException;
 import eu.tommartens.horcerace.game.GameService;
-import eu.tommartens.horcerace.turn.TurnProcessorFacade;
+import eu.tommartens.horcerace.turn.TurnProcessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,12 +16,12 @@ import static eu.tommartens.horcerace.HorseRaceConstants.GAMES_CACHE_NAME;
 @Service
 public class GameServiceImpl implements GameService {
 
-    private TurnProcessorFacade turnProcessorFacade;
+    private TurnProcessorService turnProcessorService;
     private GameFactory gameFactory;
 
     @Autowired
-    public GameServiceImpl(TurnProcessorFacade turnProcessorFacade, GameFactory gameFactory) {
-        this.turnProcessorFacade = turnProcessorFacade;
+    public GameServiceImpl(TurnProcessorService turnProcessorService, GameFactory gameFactory) {
+        this.turnProcessorService = turnProcessorService;
         this.gameFactory = gameFactory;
     }
 
@@ -40,9 +40,9 @@ public class GameServiceImpl implements GameService {
     @Override
     @CachePut(value = GAMES_CACHE_NAME, key = "#result.id")
     public Game doTurn(Game game) {
-        turnProcessorFacade.processPreTurn(game);
-        Card card = turnProcessorFacade.processTurn(game);
-        turnProcessorFacade.processPostTurn(game, card);
+        turnProcessorService.processPreTurn(game);
+        Card card = turnProcessorService.processTurn(game);
+        turnProcessorService.processPostTurn(game, card);
         return game;
     }
 
