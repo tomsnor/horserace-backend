@@ -2,6 +2,7 @@ package eu.tommartens.horcerace.turn.impl;
 
 import eu.tommartens.horcerace.card.Card;
 import eu.tommartens.horcerace.game.Game;
+import eu.tommartens.horcerace.game.GameStatus;
 import eu.tommartens.horcerace.lane.Lane;
 import eu.tommartens.horcerace.lane.LaneStatus;
 import eu.tommartens.horcerace.turn.TurnPostProcessor;
@@ -20,6 +21,7 @@ public class CheckForFinishTurnPostProcessorImpl implements TurnPostProcessor {
                 lane.setLaneStatus(LaneStatus.LOSER);
             }
             winner.setLaneStatus(LaneStatus.WINNER);
+            game.setStatus(GameStatus.FINISHED);
         });
     }
 

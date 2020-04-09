@@ -6,17 +6,17 @@ import eu.tommartens.horcerace.card.Suit;
 import eu.tommartens.horcerace.deck.Deck;
 import eu.tommartens.horcerace.deck.DeckService;
 import eu.tommartens.horcerace.lane.Lane;
-import eu.tommartens.horcerace.lane.LaneService;
+import eu.tommartens.horcerace.lane.LaneFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LaneServiceImpl implements LaneService {
+public class LaneFactoryImpl implements LaneFactory {
 
     private final DeckService deckService;
 
     @Autowired
-    public LaneServiceImpl(final DeckService deckService) {
+    public LaneFactoryImpl(final DeckService deckService) {
         this.deckService = deckService;
     }
 

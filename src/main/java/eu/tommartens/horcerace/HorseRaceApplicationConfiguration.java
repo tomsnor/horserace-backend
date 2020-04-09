@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static eu.tommartens.horcerace.HorseRaceConstants.GAMES_CACHE_NAME;
 
@@ -60,6 +61,7 @@ public class HorseRaceApplicationConfiguration {
         return Caffeine.newBuilder()
                 .initialCapacity(10)
                 .maximumSize(500)
+                .expireAfterAccess(15, TimeUnit.MINUTES)
                 .recordStats();
     }
 

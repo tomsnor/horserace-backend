@@ -6,4 +6,5 @@ public interface GameService {
 
     Game get(String id);
 
+    Game doTurn(Game game);
 }

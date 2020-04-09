@@ -4,25 +4,11 @@ import eu.tommartens.horcerace.card.Card;
 import eu.tommartens.horcerace.card.Face;
 import eu.tommartens.horcerace.card.Suit;
 import eu.tommartens.horcerace.deck.Deck;
-import eu.tommartens.horcerace.deck.DeckFactory;
 import eu.tommartens.horcerace.deck.DeckService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DeckServiceImpl implements DeckService {
-
-    private DeckFactory deckFactory;
-
-    @Autowired
-    public DeckServiceImpl(DeckFactory deckFactory) {
-        this.deckFactory = deckFactory;
-    }
-
-    @Override
-    public Deck create() {
-        return deckFactory.create();
-    }
 
     @Override
     public Card drawCardAndAddToPile(final Deck deck) {

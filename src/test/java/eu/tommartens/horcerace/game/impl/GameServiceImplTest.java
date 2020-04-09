@@ -2,9 +2,8 @@ package eu.tommartens.horcerace.game.impl;
 
 import eu.tommartens.horcerace.deck.DeckService;
 import eu.tommartens.horcerace.game.Game;
-import eu.tommartens.horcerace.game.GameService;
 import eu.tommartens.horcerace.lane.Lane;
-import eu.tommartens.horcerace.lane.LaneService;
+import eu.tommartens.horcerace.lane.LaneFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,15 +14,15 @@ import static org.mockito.Mockito.mock;
 
 public class GameServiceImplTest {
 
-    private GameService gameService;
+//    private GameService gameService;
 
     private DeckService deckService;
-    private LaneService laneService;
+    private LaneFactory laneService;
 
     @BeforeEach
     void setUp() {
         deckService = mock(DeckService.class);
-        laneService = mock(LaneService.class);
+        laneService = mock(LaneFactory.class);
 //        gameService = new GameServiceImpl(deckService, laneService);
     }
 
