@@ -26,7 +26,7 @@ public class DeckFactoryImpl implements DeckFactory {
     @Override
     public Deck create() {
         Deck deck = new Deck();
-        deck.setCards(createCards());
+        deck.setStack(createCards());
         return deck;
     }
 

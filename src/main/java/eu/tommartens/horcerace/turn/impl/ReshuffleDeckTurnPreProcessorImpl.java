@@ -5,6 +5,7 @@ import eu.tommartens.horcerace.game.Game;
 import eu.tommartens.horcerace.turn.TurnPreProcessor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,12 +14,15 @@ public class ReshuffleDeckTurnPreProcessorImpl implements TurnPreProcessor {
 
     @Override
     public void process(Game game) {
-        List<Card> cards = game.getDeck().getCards();
-        List<Card> pile = game.getDeck().getPile();
-        if (cards.size() <= 0) {
-            cards.addAll(pile);
+        List<Card> stack = new ArrayList<>(game.getDeck().getStack());
+        List<Card> pile = new ArrayList<>(game.getDeck().getPile());
+        if (stack.size() <= 0) {
+            stack.addAll(pile);
             pile.clear();
-            Collections.shuffle(cards);
+            Collections.shuffle(stack);
+            game.getDeck().setStack(stack);
+            game.getDeck().setPile(pile);
         }
     }
+
 }

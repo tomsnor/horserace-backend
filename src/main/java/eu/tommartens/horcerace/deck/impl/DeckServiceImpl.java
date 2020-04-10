@@ -15,24 +15,24 @@ public class DeckServiceImpl implements DeckService {
 
     @Override
     public Card drawCardAndAddToPile(final Deck deck) {
-        List<Card> cardList = new ArrayList<>(deck.getCards());
+        List<Card> cardList = new ArrayList<>(deck.getStack());
         final Card card = cardList.remove(0);
         deck.getPile().add(card);
-        deck.setCards(cardList);
+        deck.setStack(cardList);
         return card;
     }
 
     @Override
     public Card removeCardFromDeck(final Deck deck, final Face face, final Suit suit) {
         final Card card = this.findCard(deck, face, suit);
-        List<Card> cardList = new ArrayList<>(deck.getCards());
+        List<Card> cardList = new ArrayList<>(deck.getStack());
         cardList.remove(card);
-        deck.setCards(cardList);
+        deck.setStack(cardList);
         return card;
     }
 
     protected Card findCard(final Deck deck, final Face face, final Suit suit) {
         final Card cardToFind = new Card(face, suit);
-        return deck.getCards().stream().filter(card -> card.equals(cardToFind)).findFirst().get();
+        return deck.getStack().stream().filter(card -> card.equals(cardToFind)).findFirst().get();
     }
 }

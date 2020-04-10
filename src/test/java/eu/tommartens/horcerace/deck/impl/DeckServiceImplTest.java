@@ -27,7 +27,7 @@ public class DeckServiceImplTest {
     public void drawCardAndAddToPile() {
         Card expected = mock(Card.class);
         Deck deck = new Deck();
-        deck.setCards(Collections.singletonList(expected));
+        deck.setStack(Collections.singletonList(expected));
 
         Card actual = deckService.drawCardAndAddToPile(deck);
 
@@ -39,11 +39,11 @@ public class DeckServiceImplTest {
     public void removeCardFromDeck() {
         Card expected = new Card(Face.ACE, Suit.SPADES);
         Deck deck = new Deck();
-        deck.setCards(Collections.singletonList(expected));
+        deck.setStack(Collections.singletonList(expected));
 
         Card actual = deckService.removeCardFromDeck(deck, Face.ACE, Suit.SPADES);
 
         assertEquals(expected, actual);
-        assertTrue(deck.getCards().isEmpty());
+        assertTrue(deck.getStack().isEmpty());
     }
 }

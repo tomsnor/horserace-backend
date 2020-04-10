@@ -7,15 +7,15 @@ import java.util.List;
 
 public class Deck {
 
-    private List<Card> cards = new ArrayList<>(54);
+    private List<Card> stack = new ArrayList<>(54);
     private List<Card> pile = new ArrayList<>();
 
-    public List<Card> getCards() {
-        return this.cards;
+    public List<Card> getStack() {
+        return this.stack;
     }
 
-    public void setCards(final List<Card> cards) {
-        this.cards = cards;
+    public void setStack(final List<Card> stack) {
+        this.stack = stack;
     }
 
     public List<Card> getPile() {
