@@ -1,11 +1,11 @@
 package eu.tommartens.horcerace;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
-import eu.tommartens.horcerace.card.Suit;
-import eu.tommartens.horcerace.turn.AfterTurnProcessor;
-import eu.tommartens.horcerace.turn.TurnPostProcessor;
-import eu.tommartens.horcerace.turn.TurnPreProcessor;
-import eu.tommartens.horcerace.turn.TurnProcessor;
+import eu.tommartens.horcerace.card.data.Suit;
+import eu.tommartens.horcerace.turn.service.AfterTurnProcessor;
+import eu.tommartens.horcerace.turn.service.TurnPostProcessor;
+import eu.tommartens.horcerace.turn.service.TurnPreProcessor;
+import eu.tommartens.horcerace.turn.service.TurnProcessor;
 import org.modelmapper.ModelMapper;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
