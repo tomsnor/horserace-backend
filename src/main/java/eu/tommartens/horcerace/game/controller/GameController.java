@@ -27,11 +27,11 @@ public class GameController {
                 .toUri();
         return ResponseEntity.created(location).body(game);
     }
-//
-//    @GetMapping("/game/{id}")
-//    public GameDTO join(@PathVariable final String id) {
-//        return this.gameFacade.get(id);
-//    }
+
+    @GetMapping("/game/{id}")
+    public GameDTO join(@PathVariable final String id) {
+        return this.gameFacade.get(id);
+    }
 
     @GetMapping("/game/{id}/iterate")
     public GameDTO iterate(@PathVariable final String id) {
