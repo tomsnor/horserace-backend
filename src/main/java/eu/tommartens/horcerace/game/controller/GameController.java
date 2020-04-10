@@ -6,6 +6,10 @@ import eu.tommartens.horcerace.game.facade.GameFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -17,7 +21,7 @@ public class GameController {
 
     private GameFacade gameFacade;
 
-    @PostMapping("/game")
+    @PostMapping("/game/")
     public ResponseEntity<GameDTO> create() {
         final GameDTO game = this.gameFacade.create();
         final URI location = ServletUriComponentsBuilder
@@ -27,14 +31,16 @@ public class GameController {
                 .toUri();
         return ResponseEntity.created(location).body(game);
     }
-//
-//    @GetMapping("/game/{id}")
-//    public GameDTO join(@PathVariable final String id) {
-//        return this.gameFacade.get(id);
-//    }
 
-    @GetMapping("/game/{id}/iterate")
-    public GameDTO iterate(@PathVariable final String id) {
+    @GetMapping("/game/{id}/")
+    @SubscribeMapping("/{id}/")
+    public GameDTO join(@PathVariable @DestinationVariable final String id) {
+        return this.gameFacade.get(id);
+    }
+
+    @MessageMapping("/{id}/iterate/")
+    @SendTo("/game/{id}/")
+    public GameDTO iterate(@DestinationVariable final String id) {
         return this.gameFacade.doTurn(id);
     }
 

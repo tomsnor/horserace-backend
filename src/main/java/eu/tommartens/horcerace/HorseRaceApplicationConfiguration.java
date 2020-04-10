@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import static eu.tommartens.horcerace.HorseRaceConstants.GAMES_CACHE_NAME;
 
 @Configuration
 @EnableCaching
+@Import(WebSocketConfig.class)
 public class HorseRaceApplicationConfiguration {
 
     @Bean
