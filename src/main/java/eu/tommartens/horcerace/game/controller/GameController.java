@@ -12,7 +12,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@CrossOrigin(origins = "*", exposedHeaders = "location")
 public class GameController {
 
     private GameFacade gameFacade;
@@ -22,18 +21,18 @@ public class GameController {
         final GameDTO game = this.gameFacade.create();
         final URI location = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
-                .path("/{id}")
+                .path("/{id}/")
                 .buildAndExpand(game.getId())
                 .toUri();
         return ResponseEntity.created(location).body(game);
     }
 
-    @GetMapping("/game/{id}")
+    @GetMapping("/game/{id}/")
     public GameDTO join(@PathVariable final String id) {
         return this.gameFacade.get(id);
     }
 
-    @GetMapping("/game/{id}/iterate")
+    @GetMapping("/game/{id}/iterate/")
     public GameDTO iterate(@PathVariable final String id) {
         return this.gameFacade.doTurn(id);
     }
