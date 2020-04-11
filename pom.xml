@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>eu.tommartens</groupId>
-    <artifactId>horcerace</artifactId>
+    <artifactId>horserace</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>horcerace</name>
-    <description>Demo project for Spring Boot</description>
+    <name>horserace</name>
+    <description>Horserace</description>
 
     <properties>
         <java.version>1.8</java.version>
