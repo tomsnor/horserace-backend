@@ -16,6 +16,9 @@
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/java/eu/tommartens/horcerace/HorceraceApplicationConfiguration.java</file>
           <file>file://$MODULE_DIR$/src/main/java/eu/tommartens/horcerace/HorceraceApplication.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/eu/tommartens/horcerace/WebConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/eu/tommartens/horcerace/HorseRaceApplicationConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/eu/tommartens/horcerace/HorseRaceApplication.java</file>
         </fileset>
       </configuration>
     </facet>

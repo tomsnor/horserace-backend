@@ -47,6 +47,11 @@ public class DeckFactoryImpl implements DeckFactory {
                 }
             }
         }
+
+        for (int i = 0; i < 2; i++) {
+            Card ace = cardFactory.create(Face.KING, Suit.SPADES);
+            cards.add(ace);
+        }
     }
 
     protected void addJokers(List<Card> cards) {
