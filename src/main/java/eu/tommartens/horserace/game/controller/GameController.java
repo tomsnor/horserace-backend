@@ -10,31 +10,33 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-@RestController
+@Controller
 public class GameController {
 
     private GameFacade gameFacade;
 
     @PostMapping("/game/")
-    public ResponseEntity<GameDTO> create() {
+    @ResponseBody
+    public ResponseEntity<String> create() {
         final GameDTO game = this.gameFacade.create();
         final URI location = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
                 .path("/{id}/")
                 .buildAndExpand(game.getId())
                 .toUri();
-        return ResponseEntity.created(location).body(game);
+        return ResponseEntity.created(location).body(String.format("/game/%s/", game.getId()));
     }
 
-
-    @GetMapping("/game/{id}/")
     @SubscribeMapping("/{id}/")
-    public GameDTO join(@PathVariable @DestinationVariable final String id) {
+    @GetMapping("/game/{id}/")
+    @ResponseBody
+    public GameDTO join(@DestinationVariable @PathVariable final String id) {
         return this.gameFacade.get(id);
     }
 

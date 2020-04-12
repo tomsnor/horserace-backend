@@ -28,7 +28,9 @@ public class JokerTurnProcessorImplTest {
             "5,7,3,2,3,2,5,7",
             "0,0,0,1,1,1,1,0",
             "1,2,3,4,4,3,2,1",
-            "1,2,2,2,2,1,1,1"
+            "1,2,2,2,2,1,1,1",
+            "0,0,0,0,0,0,0,0",
+            "5,5,5,5,5,5,5,5"
     })
     public void processTurnWith4Lanes(int p1, int p2, int p3, int p4, int e1, int e2, int e3, int e4) {
         Game game = new Game();
