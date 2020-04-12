@@ -1,4 +1,6 @@
 # horserace-backend
-Create runnable from sources: ./mvnw clean package
+To create and execute runnable from sources, clone the repository and execute the following commands in the repository root:
 
-Run with correct profile:  java -jar target/horserace-0.0.1-SNAPSHOT.jar -Dspring.profiles.active=dev
+./mvnw clean package
+
+java -jar target/horserace-0.0.1-SNAPSHOT.jar -Dspring.profiles.active=dev
