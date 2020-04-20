@@ -6,7 +6,7 @@ public class LaneDTO {
 
     private CardDTO card;
     private int position;
-    private LaneStatus laneStatus;
+    private LaneStatus status;
 
     public CardDTO getCard() {
         return this.card;
@@ -24,11 +24,11 @@ public class LaneDTO {
         this.position = position;
     }
 
-    public LaneStatus getLaneStatus() {
-        return this.laneStatus;
+    public LaneStatus getStatus() {
+        return this.status;
     }
 
-    public void setLaneStatus(final LaneStatus laneStatus) {
-        this.laneStatus = laneStatus;
+    public void setStatus(final LaneStatus status) {
+        this.status = status;
     }
 }

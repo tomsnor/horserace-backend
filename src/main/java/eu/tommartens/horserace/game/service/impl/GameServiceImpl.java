@@ -9,13 +9,9 @@ import eu.tommartens.horserace.turn.service.TurnPreProcessor;
 import eu.tommartens.horserace.turn.service.TurnProcessorService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static eu.tommartens.horserace.HorseRaceConstants.GAMES_CACHE_NAME;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -33,19 +29,16 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    @CachePut(value = GAMES_CACHE_NAME, key = "#result.id")
     public Game create() {
         return gameFactory.create();
     }
 
     @Override
-    @Cacheable(value = GAMES_CACHE_NAME)
     public Game get(final String id) {
         throw new GameNotFoundException(String.format("The game with id %s is not active", id));
     }
 
     @Override
-    @CachePut(value = GAMES_CACHE_NAME, key = "#result.id")
     public Game doTurn(Game game) {
         executeTurnPreProcessors(game);
         turnProcessorService.processTurn(game);

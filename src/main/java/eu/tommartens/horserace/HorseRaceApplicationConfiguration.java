@@ -2,7 +2,6 @@ package eu.tommartens.horserace;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import eu.tommartens.horserace.card.data.Suit;
-import eu.tommartens.horserace.turn.service.AfterTurnProcessor;
 import eu.tommartens.horserace.turn.service.TurnPostProcessor;
 import eu.tommartens.horserace.turn.service.TurnPreProcessor;
 import eu.tommartens.horserace.turn.service.TurnProcessor;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static eu.tommartens.horserace.HorseRaceConstants.GAMES_CACHE_NAME;
+import static eu.tommartens.horserace.HorseRaceConstants.ROOMS_CACHE_NAME;
 
 @Configuration
 @EnableCaching
@@ -54,15 +53,8 @@ public class HorseRaceApplicationConfiguration {
     }
 
     @Bean
-    public List<AfterTurnProcessor> afterTurnProcessors(AfterTurnProcessor cleanUpGameAfterTurnProcessor) {
-        List<AfterTurnProcessor> afterTurnProcessors = new ArrayList<>();
-        afterTurnProcessors.add(cleanUpGameAfterTurnProcessor);
-        return afterTurnProcessors;
-    }
-
-    @Bean
     public CacheManager cacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager(GAMES_CACHE_NAME);
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager(ROOMS_CACHE_NAME);
         cacheManager.setCaffeine(caffeineCacheBuilder());
         return cacheManager;
     }
