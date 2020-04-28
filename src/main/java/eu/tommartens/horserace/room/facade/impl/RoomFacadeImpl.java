@@ -12,40 +12,40 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoomFacadeImpl implements RoomFacade {
 
-    private RoomService roomService;
-    private ModelMapper modelMapper;
-    private GameFacade gameFacade;
+    private final RoomService roomService;
+    private final ModelMapper modelMapper;
+    private final GameFacade gameFacade;
 
     @Autowired
-    public RoomFacadeImpl(RoomService roomService, ModelMapper modelMapper, GameFacade gameFacade) {
+    public RoomFacadeImpl(final RoomService roomService, final ModelMapper modelMapper, final GameFacade gameFacade) {
         this.roomService = roomService;
         this.modelMapper = modelMapper;
         this.gameFacade = gameFacade;
     }
 
     @Override
-    public RoomDTO get(String id) {
-        Room room = roomService.get(id);
-        return modelMapper.map(room, RoomDTO.class);
+    public RoomDTO get(final String id) {
+        final Room room = this.roomService.get(id);
+        return this.modelMapper.map(room, RoomDTO.class);
     }
 
     @Override
     public RoomDTO create() {
-        Room room = roomService.create();
-        return modelMapper.map(room, RoomDTO.class);
+        final Room room = this.roomService.create();
+        return this.modelMapper.map(room, RoomDTO.class);
     }
 
     @Override
-    public RoomDTO iterateGame(String roomId) {
-        Room room = roomService.get(roomId);
-        gameFacade.doTurn(room.getGame());
-        return modelMapper.map(room, RoomDTO.class);
+    public RoomDTO iterateGame(final String roomId) {
+        final Room room = this.roomService.get(roomId);
+        this.gameFacade.doTurn(room.getGame());
+        return this.modelMapper.map(room, RoomDTO.class);
     }
 
     @Override
-    public RoomDTO resetGame(String roomId) {
-        Room room = roomService.get(roomId);
-        room = roomService.resetGame(room);
-        return modelMapper.map(room, RoomDTO.class);
+    public RoomDTO resetGame(final String roomId) {
+        Room room = this.roomService.get(roomId);
+        room = this.roomService.resetGame(room);
+        return this.modelMapper.map(room, RoomDTO.class);
     }
 }
