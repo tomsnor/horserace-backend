@@ -20,35 +20,35 @@ public class JokerTurnProcessorImplTest {
 
     @Before
     public void setUp() {
-        jokerTurnProcessor = new JokerTurnProcessorImpl();
+        this.jokerTurnProcessor = new JokerTurnProcessorImpl();
     }
 
     @Test
     @Parameters({
-            "5,7,3,2,3,2,5,7",
+            "5,7,3,2,5,2,3,7",
             "0,0,0,1,1,1,1,0",
-            "1,2,3,4,4,3,2,1",
+            "1,2,3,4,4,2,3,1",
             "1,2,2,2,2,1,1,1",
             "0,0,0,0,0,0,0,0",
             "5,5,5,5,5,5,5,5"
     })
-    public void processTurnWith4Lanes(int p1, int p2, int p3, int p4, int e1, int e2, int e3, int e4) {
-        Game game = new Game();
-        Lane lane1 = new Lane();
+    public void processTurnWith4Lanes(final int p1, final int p2, final int p3, final int p4, final int e1, final int e2, final int e3, final int e4) {
+        final Game game = new Game();
+        final Lane lane1 = new Lane();
         lane1.setPosition(p1);
 
-        Lane lane2 = new Lane();
+        final Lane lane2 = new Lane();
         lane2.setPosition(p2);
 
-        Lane lane3 = new Lane();
+        final Lane lane3 = new Lane();
         lane3.setPosition(p3);
 
-        Lane lane4 = new Lane();
+        final Lane lane4 = new Lane();
         lane4.setPosition(p4);
 
         game.setLanes(Arrays.asList(lane1, lane2, lane3, lane4));
 
-        jokerTurnProcessor.processTurn(game, null);
+        this.jokerTurnProcessor.processTurn(game, null);
 
         assertEquals(lane1.getPosition(), e1);
         assertEquals(lane2.getPosition(), e2);
