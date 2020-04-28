@@ -10,7 +10,7 @@ public class Card {
         this.suit = suit;
     }
 
-    protected Card(Suit suit) {
+    public Card(Suit suit) {
         this.suit = suit;
     }
 

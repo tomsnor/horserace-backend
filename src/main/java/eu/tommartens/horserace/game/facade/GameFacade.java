@@ -1,13 +1,9 @@
 package eu.tommartens.horserace.game.facade;
 
-import eu.tommartens.horserace.game.data.GameDTO;
+import eu.tommartens.horserace.game.data.Game;
 
 public interface GameFacade {
 
-    GameDTO create();
-
-    GameDTO get(String id);
-
-    GameDTO doTurn(String id);
+    void doTurn(Game game);
 
 }

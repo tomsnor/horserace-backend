@@ -3,6 +3,7 @@ package eu.tommartens.horserace.deck.service.impl;
 import eu.tommartens.horserace.card.data.Card;
 import eu.tommartens.horserace.card.data.Face;
 import eu.tommartens.horserace.card.data.Suit;
+import eu.tommartens.horserace.card.exception.CardNotFoundException;
 import eu.tommartens.horserace.deck.data.Deck;
 import eu.tommartens.horserace.deck.service.DeckService;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,9 @@ public class DeckServiceImpl implements DeckService {
 
     protected Card findCard(final Deck deck, final Face face, final Suit suit) {
         final Card cardToFind = new Card(face, suit);
-        return deck.getStack().stream().filter(card -> card.equals(cardToFind)).findFirst().get();
+        return deck.getStack().stream()
+                .filter(card -> card.equals(cardToFind))
+                .findFirst()
+                .orElseThrow(CardNotFoundException::new);
     }
 }
